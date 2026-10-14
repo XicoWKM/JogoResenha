@@ -2,13 +2,12 @@
 #include<string.h>
 
 //variavel global da posiçaõ do jogador e do mapa
-int pscJog[2] = {2,2};
-
- int mapa[15][15] = {
+int pscJog[2] = {3,3};
+int mapa[15][15] = {
      {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-     {1,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-     {1,1,1,1,1,0,0,0,1,1,1,0,0,0,1},
-     {1,0,1,0,0,0,1,0,0,0,1,0,1,0,1},
+     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+     {1,0,2,0,1,0,0,0,1,1,1,0,0,0,1},
+     {1,0,0,0,0,0,1,0,0,0,1,0,1,0,1},
      {1,0,1,0,1,0,1,1,1,0,1,0,1,0,1},
      {1,0,0,0,1,0,0,0,1,0,0,0,1,0,1},
      {1,1,1,0,1,1,1,0,1,1,1,0,1,0,1},
@@ -58,9 +57,21 @@ int printMovimento(){
   return mov;
 }
 
+void movimento(int mov){
+  //tranformar o int em um numero binario
+  int binario[4];
+  for(int i=0;i<4;i++){ 
+    binario[i] = mov%2;
+    mov = mov/2;
+    printf("%d\t",binario[i]);
+  } 
+  
+}
 
 int main(){
   int mov;
   mov = printMovimento();
-  printf("\n%d",mov);
+  printf("\n");
+  movimento(mov);
 }
+
