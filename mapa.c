@@ -1,12 +1,13 @@
 #include<stdio.h>
 #include<string.h>
+#include <stdbool.h>
 
 //variavel global da posiçaõ do jogador e do mapa
-int pscJog[2] = {3,3};
+int pscJog[2] = {2,2};
 int mapa[15][15] = {
      {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-     {1,0,2,0,1,0,0,0,1,1,1,0,0,0,1},
+     {1,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+     {1,0,1,1,1,0,0,0,1,1,1,0,0,0,1},
      {1,0,0,0,0,0,1,0,0,0,1,0,1,0,1},
      {1,0,1,0,1,0,1,1,1,0,1,0,1,0,1},
      {1,0,0,0,1,0,0,0,1,0,0,0,1,0,1},
@@ -17,7 +18,7 @@ int mapa[15][15] = {
      {1,1,1,1,1,0,1,0,1,1,1,0,1,0,1},
      {1,0,0,0,1,0,0,0,0,0,1,0,0,0,1},
      {1,0,1,0,1,1,1,1,1,0,1,1,1,0,1},
-     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+     {1,0,0,0,0,0,0,0,0,0,0,0,0,3,1},
      {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
  };
 
@@ -59,12 +60,18 @@ int printMovimento(){
 
 void movimento(int mov){
   //tranformar o int em um numero binario
-  int binario[4];
+  bool binario[4];
   for(int i=0;i<4;i++){ 
-    binario[i] = mov%2;
+    binario[i] = (bool) (mov%2);
     mov = mov/2;
     printf("%d\t",binario[i]);
   } 
+  //onde o jogador quer ir e verificar se é possivel
+  int opt;
+  printf("\nPara onde queres ir?: ");
+   scanf("%d",&opt);
+
+
   
 }
 
