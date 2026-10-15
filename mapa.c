@@ -8,7 +8,7 @@ int mapaJogador [15][15];
 int mapa[15][15] = {
     {5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},
     {5,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-    {5,0,1,1,1,0,0,0,1,1,1,0,0,0,5},
+    {5,7,1,1,1,0,0,0,1,1,1,0,0,0,5},
     {5,0,0,0,0,0,1,0,0,0,1,0,1,0,5},
     {5,0,1,0,1,0,1,1,1,0,1,0,1,0,5},
     {5,0,0,0,1,0,0,0,1,0,0,0,1,0,5},
@@ -65,7 +65,7 @@ void movimento(int mov){
   for(int i=0;i<4;i++){ 
     binario[i] = (bool) (mov%2);
     mov = mov/2;
-    printf("%d\t",binario[i]);
+    //printf("%d\t",binario[i]);
   } 
   //onde o jogador quer ir e verificar se é possivel
   int opt;
@@ -124,9 +124,17 @@ void printMapa(){
         printf("\033[38;5;22m\u2588\u2588 \033[0m");
       else if(mapaJogador[y][x] == 1)
         printf("\033[38;5;1m\u2588\u2588 \033[0m");
+      else if(mapaJogador[y][x] == 7)
+        printf("\033[38;5;3m\u2588\u2588 \033[0m");
     }
     printf("\n");
   }
+}
+bool verificadorVitoria(){
+if(mapa[pscJog[0]][pscJog[1] == 3])
+  return true;
+else
+  return false;
 }
 
 int main(){
@@ -137,10 +145,15 @@ int main(){
   int mov;
 
   while(1){
-  printMapa();
-  mov = printMovimento();
-  printf("\n");
-  movimento(mov);
+    printMapa();
+    mov = printMovimento();
+    printf("\n");
+    movimento(mov);
+    if(verificadorVitoria() == true){
+       printMapa();
+       printf("\n***VOCE VENCEU***");
+      return 0;
+    }
   }
   
 }
