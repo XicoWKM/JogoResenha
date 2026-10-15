@@ -8,7 +8,7 @@ int mapaJogador [15][15];
 int mapa[15][15] = {
     {5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},
     {5,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-    {5,7,1,1,1,0,0,0,1,1,1,0,0,0,5},
+    {5,0,1,1,1,0,0,0,1,1,1,0,0,0,5},
     {5,0,0,0,0,0,1,0,0,0,1,0,1,0,5},
     {5,0,1,0,1,0,1,1,1,0,1,0,1,0,5},
     {5,0,0,0,1,0,0,0,1,0,0,0,1,0,5},
@@ -17,7 +17,7 @@ int mapa[15][15] = {
     {5,0,1,1,1,1,1,0,1,0,1,1,1,0,5},
     {5,0,0,0,0,0,1,0,1,0,0,0,1,0,5},
     {5,1,1,1,1,0,1,0,1,1,1,0,1,0,5},
-    {5,0,0,0,1,0,0,0,0,0,1,0,0,0,5},
+    {5,0,0,7,1,0,0,0,0,0,1,0,0,0,5},
     {5,0,1,0,1,1,1,1,1,0,1,1,1,0,5},
     {5,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
     {5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}
@@ -27,14 +27,14 @@ int printMovimento(){
   int mov = 0;
   //movimento y
     //cima
-    if(mapa[pscJog[0] - 1][pscJog[1]] == 0 ){
+    if(mapa[pscJog[0]-1][pscJog[1]] != 1 && mapa[pscJog[0]-1][pscJog[1]] != 5){
     // printf("\nCima livre");
       mov += 1;
     }
     // else if(mapa[pscJog[0]-1][pscJog[1]] == 1 )
     //   printf("\nCima bloqueada");
     //fbaixo
-    if(mapa[pscJog[0]+1][pscJog[1]] == 0 ){
+    if(mapa[pscJog[0]+1][pscJog[1]] != 1 && mapa[pscJog[0]+1][pscJog[1]] != 5){
      // printf("\nBaixo livre");
       mov += 2;
     }
@@ -42,14 +42,14 @@ int printMovimento(){
     //   printf("\nBaixo bloqueada");
 //movimento x
     //direita
-    if(mapa[pscJog[0]][pscJog[1]+1] == 0 ){
+    if(mapa[pscJog[0]][pscJog[1]+1] != 1 && mapa[pscJog[0]][pscJog[1]+1] != 5){
     //  printf("\nDireita livre");
        mov += 4;
     }
     // else if(mapa[pscJog[0]][pscJog[1]+1] == 1 )
     //  printf("\nDireita bloqueada");
     //esquerda
-    if(mapa[pscJog[0]][pscJog[1]-1] == 0 ){
+    if(mapa[pscJog[0]][pscJog[1]-1] != 1 && mapa[pscJog[0]][pscJog[1]-1] != 5){
     //  printf("\nEsquerda livre");
      mov += 8;
     }
@@ -131,12 +131,11 @@ void printMapa(){
   }
 }
 bool verificadorVitoria(){
-if(mapa[pscJog[0]][pscJog[1] == 3])
-  return true;
-else
-  return false;
+  if(mapa[pscJog[0]][pscJog[1]] == 7)
+   return true;
+  else
+    return false; 
 }
-
 int main(){
   for(int c1=0;c1<15;c1++){
     for(int c2=0;c2<15;c2++)
