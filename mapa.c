@@ -72,33 +72,33 @@ void movimento(int mov){
   } 
   //onde o jogador quer ir e verificar se é possivel
   int opt;
- printf("\nPara onde queres ir?:\n1. Cima\n2. Baixo\n3. Direita\n4. Esquerda");
+ //+printf("\nPara onde queres ir?:\n1. Cima\n2. Baixo\n3. Direita\n4. Esquerda");
    opt = fgetc(stdin);
    //opt -= 0x30;
   //cima
   if(opt == 'w' && binario[0] == 1){
-    mapaJogador[pscJog[0]][pscJog[1]] = 1;
+    mapaJogador[pscJog[0]][pscJog[1]] = 0;
     pscJog[0] = pscJog[0] - 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
     //printf("\nPosicao do jogador x = %d e y = %d",pscJog[0],pscJog[1]);
   }
   //baixo
   else if(opt == 's' && binario[1] == 1){
-    mapaJogador[pscJog[0]][pscJog[1]] = 1;
+    mapaJogador[pscJog[0]][pscJog[1]] = 0;
     pscJog[0] = pscJog[0] + 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
     //printf("\nPosicao do jogador x = %d e y = %d",pscJog[0],pscJog[1]);
   }
   //direita
   else if(opt == 'd' && binario[2] == 1){
-    mapaJogador[pscJog[0]][pscJog[1]] = 1;
+    mapaJogador[pscJog[0]][pscJog[1]] = 0;
     pscJog[1] = pscJog[1] + 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
     //printf("\nPosicao do jogador x = %d e y = %d",pscJog[0],pscJog[1]);
   }
   //esquerda
   else if(opt == 'a' && binario[3] == 1){
-    mapaJogador[pscJog[0]][pscJog[1]] = 1;
+    mapaJogador[pscJog[0]][pscJog[1]] = 0;
     pscJog[1] = pscJog[1] - 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
     //printf("\nPosicao do jogador x = %d e y = %d",pscJog[1],pscJog[0]);
@@ -115,7 +115,11 @@ void printMapa(){
    mapaJogador[pscJog[0]+1][pscJog[1]] = mapa[pscJog[0]+1][pscJog[1]];
    mapaJogador[pscJog[0]][pscJog[1]+1] = mapa[pscJog[0]][pscJog[1]+1];
    mapaJogador[pscJog[0]][pscJog[1]-1] = mapa[pscJog[0]][pscJog[1]-1];
-  system("clear");
+  #if defined(__unix__) || defined(__APPLE__)
+      system("clear");
+  #elif defined(_WIN32)
+      system("CLS");
+  #endif
   for(int y=0;y<15;y++){
     for(int x=0;x<15;x++){
       if(mapaJogador[y][x] == 6)
@@ -141,7 +145,9 @@ bool verificadorVitoria(){
     return false; 
 }
 int main(){
-  system("stty -icanon -echo");
+  #if defined(__unix__) || defined(__APPLE__)
+    system("stty -icanon -echo");
+  #endif
   for(int c1=0;c1<15;c1++){
     for(int c2=0;c2<15;c2++)
       mapaJogador[c1][c2] = 6;
