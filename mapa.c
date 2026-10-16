@@ -166,7 +166,9 @@ int main(){
     if(verificadorVitoria() == true){
        printMapa();
        printf("\n***VOCE VENCEU***");
-       system("stty sane");
+      #if defined(__unix__) && defined(__APPLE__)
+         system("stty sane");
+      #endif
       return 0;
     }
   }
