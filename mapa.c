@@ -116,14 +116,14 @@ void printMapa(){
    mapaJogador[pscJog[0]+1][pscJog[1]] = mapa[pscJog[0]+1][pscJog[1]];
    mapaJogador[pscJog[0]][pscJog[1]+1] = mapa[pscJog[0]][pscJog[1]+1];
    mapaJogador[pscJog[0]][pscJog[1]-1] = mapa[pscJog[0]][pscJog[1]-1];  
-  // #if defined(__unix__) || defined(__APPLE__)
-  //     system("clear");
-  // #elif defined(_WIN32)
-  //     system("CLS");
-  // #endif
-  printf(ESC"{15};{15}H"); //limpa a tela
-  printf(ESC"1J");
-  printf(ESC"H");
+ #if defined(__unix__) || defined(__APPLE__)
+      system("clear");
+  #elif defined(_WIN32)
+      system("CLS");
+  #endif
+  // printf(ESC"{15};{15}H"); //limpa a tela
+  // printf(ESC"1J");
+  // printf(ESC"H");
   for(int y=0;y<15;y++){
     for(int x=0;x<15;x++){
       if(mapaJogador[y][x] == 6)
@@ -149,9 +149,9 @@ bool verificadorVitoria(){
     return false; 
 }
 int main(){
-  #if defined(__unix__) || defined(__APPLE__)
+  //#if defined(__unix__) || defined(__APPLE__)
     system("stty -icanon -echo");
-  #endif
+ // #endif
   for(int c1=0;c1<15;c1++){
     for(int c2=0;c2<15;c2++)
       mapaJogador[c1][c2] = 6;
@@ -166,9 +166,9 @@ int main(){
     if(verificadorVitoria() == true){
        printMapa();
        printf("\n***VOCE VENCEU***");
-      #if defined(__unix__) && defined(__APPLE__)
+    //  #if defined(__unix__) && defined(__APPLE__)
          system("stty sane");
-      #endif
+    //  #endif
       return 0;
     }
   }
