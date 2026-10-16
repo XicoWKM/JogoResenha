@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include <stdbool.h>
-
+#define ESC "\033["
 //variavel global da posiçaõ do jogador e do mapa
 int pscJog[2] = {1,1};
 int mapaJogador [15][15];
@@ -72,33 +72,33 @@ void movimento(int mov){
   } 
   //onde o jogador quer ir e verificar se é possivel
   int opt;
- printf("\nPara onde queres ir?:\n1. Cima\n2. Baixo\n3. Direita\n4. Esquerda");
+// printf("\nPara onde queres ir?:\n1. Cima\n2. Baixo\n3. Direita\n4. Esquerda");
    opt = fgetc(stdin);
    //opt -= 0x30;
   //cima
   if(opt == 'w' && binario[0] == 1){
-    mapaJogador[pscJog[0]][pscJog[1]] = 1;
+   // mapaJogador[pscJog[0]][pscJog[1]] = 0;
     pscJog[0] = pscJog[0] - 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
     //printf("\nPosicao do jogador x = %d e y = %d",pscJog[0],pscJog[1]);
   }
   //baixo
   else if(opt == 's' && binario[1] == 1){
-    mapaJogador[pscJog[0]][pscJog[1]] = 1;
+    //mapaJogador[pscJog[0]][pscJog[1]] = 0;
     pscJog[0] = pscJog[0] + 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
     //printf("\nPosicao do jogador x = %d e y = %d",pscJog[0],pscJog[1]);
   }
   //direita
   else if(opt == 'd' && binario[2] == 1){
-    mapaJogador[pscJog[0]][pscJog[1]] = 1;
+    mapaJogador[pscJog[0]][pscJog[1]] = 0;
     pscJog[1] = pscJog[1] + 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
     //printf("\nPosicao do jogador x = %d e y = %d",pscJog[0],pscJog[1]);
   }
   //esquerda
   else if(opt == 'a' && binario[3] == 1){
-    mapaJogador[pscJog[0]][pscJog[1]] = 1;
+   // mapaJogador[pscJog[0]][pscJog[1]] = 0;
     pscJog[1] = pscJog[1] - 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
     //printf("\nPosicao do jogador x = %d e y = %d",pscJog[1],pscJog[0]);
@@ -119,17 +119,17 @@ void printMapa(){
   for(int y=0;y<15;y++){
     for(int x=0;x<15;x++){
       if(mapaJogador[y][x] == 6)
-        printf("\033[38;5;8m\u2588\u2588 \033[0m");
+        printf(ESC"38;5;8m\u2588\u2588"ESC"0m");
       else if(mapaJogador[y][x] == 5)
-        printf("\033[38;5;0m\u2588\u2588 \033[0m");
+        printf(ESC"38;5;0m\u2588\u2588"ESC"0m");
       else if(mapaJogador[y][x] == 2)
-        printf("\033[38;5;4m\u2588\u2588 \033[0m");
+        printf(ESC"38;5;4m\u2588\u2588"ESC"0m");
       else if(mapaJogador[y][x] == 0)
-        printf("\033[38;5;22m\u2588\u2588 \033[0m");
+        printf(ESC"38;5;22m\u2588\u2588"ESC"0m");
       else if(mapaJogador[y][x] == 1)
-        printf("\033[38;5;1m\u2588\u2588 \033[0m");
+        printf(ESC"38;5;1m\u2588\u2588"ESC"0m");
       else if(mapaJogador[y][x] == 7)
-        printf("\033[38;5;3m\u2588\u2588 \033[0m");
+        printf(ESC"38;5;3m\u2588\u2588"ESC"0m");
     }
     printf("\n");
   }
