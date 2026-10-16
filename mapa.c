@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include<string.h>
 #include <stdbool.h>
 
@@ -22,6 +23,8 @@ int mapa[15][15] = {
     {5,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
     {5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}
 };
+
+
 
 int printMovimento(){
   int mov = 0;
@@ -70,30 +73,31 @@ void movimento(int mov){
   //onde o jogador quer ir e verificar se é possivel
   int opt;
  printf("\nPara onde queres ir?:\n1. Cima\n2. Baixo\n3. Direita\n4. Esquerda");
-   scanf("%d",&opt);
+   opt = fgetc(stdin);
+   //opt -= 0x30;
   //cima
-  if(opt == 1 && binario[0] == 1){
+  if(opt == 'w' && binario[0] == 1){
     mapaJogador[pscJog[0]][pscJog[1]] = 1;
     pscJog[0] = pscJog[0] - 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
     //printf("\nPosicao do jogador x = %d e y = %d",pscJog[0],pscJog[1]);
   }
   //baixo
-  else if(opt == 2 && binario[1] == 1){
+  else if(opt == 's' && binario[1] == 1){
     mapaJogador[pscJog[0]][pscJog[1]] = 1;
     pscJog[0] = pscJog[0] + 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
     //printf("\nPosicao do jogador x = %d e y = %d",pscJog[0],pscJog[1]);
   }
   //direita
-  else if(opt == 3 && binario[2] == 1){
+  else if(opt == 'd' && binario[2] == 1){
     mapaJogador[pscJog[0]][pscJog[1]] = 1;
     pscJog[1] = pscJog[1] + 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
     //printf("\nPosicao do jogador x = %d e y = %d",pscJog[0],pscJog[1]);
   }
   //esquerda
-  else if(opt == 4 && binario[3] == 1){
+  else if(opt == 'a' && binario[3] == 1){
     mapaJogador[pscJog[0]][pscJog[1]] = 1;
     pscJog[1] = pscJog[1] - 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
@@ -137,6 +141,7 @@ bool verificadorVitoria(){
     return false; 
 }
 int main(){
+  system("stty -icanon -echo");
   for(int c1=0;c1<15;c1++){
     for(int c2=0;c2<15;c2++)
       mapaJogador[c1][c2] = 6;
@@ -151,6 +156,7 @@ int main(){
     if(verificadorVitoria() == true){
        printMapa();
        printf("\n***VOCE VENCEU***");
+       system("stty sane");
       return 0;
     }
   }
