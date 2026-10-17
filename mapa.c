@@ -4,29 +4,29 @@
 #include <stdbool.h>
 #define ESC "\033["
 //variavel global da posiçaõ do jogador e do mapa
-int pscJog[2] = {1,1};
-int mapaJogador [15][15];
-int mapa[15][15] = {
-    {5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},
-    {5,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-    {5,0,1,1,1,0,0,0,1,1,1,0,0,0,5},
-    {5,0,0,0,0,0,1,0,0,0,1,0,1,0,5},
-    {5,0,1,0,1,0,1,1,1,0,1,0,1,0,5},
-    {5,0,0,0,1,0,0,0,1,0,0,0,1,0,5},
-    {5,1,1,0,1,1,1,0,1,1,1,0,1,0,5},
-    {5,0,0,0,0,0,0,0,0,0,1,0,0,0,5},
-    {5,0,1,1,1,1,1,0,1,0,1,1,1,0,5},
-    {5,0,0,0,0,0,1,0,1,0,0,0,1,0,5},
-    {5,1,1,1,1,0,1,0,1,1,1,0,1,0,5},
-    {5,0,0,7,1,0,0,0,0,0,1,0,0,0,5},
-    {5,0,1,0,1,1,1,1,1,0,1,1,1,0,5},
-    {5,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-    {5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}
-};
+// int pscJog[2] = {1,1};
+// int mapaJogador [15][15];
+// int mapa[15][15] = {
+//     {5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},
+//     {5,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+//     {5,0,1,1,1,0,0,0,1,1,1,0,0,0,5},
+//     {5,0,0,0,0,0,1,0,0,0,1,0,1,0,5},
+//     {5,0,1,0,1,0,1,1,1,0,1,0,1,0,5},
+//     {5,0,0,0,1,0,0,0,1,0,0,0,1,0,5},
+//     {5,1,1,0,1,1,1,0,1,1,1,0,1,0,5},
+//     {5,0,0,0,0,0,0,0,0,0,1,0,0,0,5},
+//     {5,0,1,1,1,1,1,0,1,0,1,1,1,0,5},
+//     {5,0,0,0,0,0,1,0,1,0,0,0,1,0,5},
+//     {5,1,1,1,1,0,1,0,1,1,1,0,1,0,5},
+//     {5,0,0,7,1,0,0,0,0,0,1,0,0,0,5},
+//     {5,0,1,0,1,1,1,1,1,0,1,1,1,0,5},
+//     {5,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+//     {5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}
+// };
 
 
 
-int printMovimento(){
+int printMovimento(int mapa[15][15],int pscJog[]){
   int mov = 0;
   //movimento y
     //cima
@@ -62,7 +62,7 @@ int printMovimento(){
   return mov;
 }
 
-void movimento(int mov){
+void movimento(int mov,int pscJog[],int mapaJogador[15][15]){
   //tranformar o int em um numero binario
   bool binario[4];
   for(int i=0;i<4;i++){ 
@@ -109,7 +109,7 @@ void movimento(int mov){
 
 }
 
-void printMapa(){
+void printMapa(int mapaJogador[15][15],int pscJog[],int mapa[15][15]){
    mapaJogador[pscJog[0]][pscJog[1]] = 2;
    mapaJogador[pscJog[0]-1][pscJog[1]] = mapa[pscJog[0]-1][pscJog[1]];
    mapaJogador[pscJog[0]+1][pscJog[1]] = mapa[pscJog[0]+1][pscJog[1]];
@@ -134,14 +134,35 @@ void printMapa(){
     printf("\n");
   }
 }
-bool verificadorVitoria(){
+bool verificadorVitoria(int pscJog[], int mapa[15][15]){
   if(mapa[pscJog[0]][pscJog[1]] == 7)
    return true;
   else
     return false; 
 }
+
 int main(){
   system("stty -icanon -echo");
+  int pscJog[2] = {1,1};
+  int mapaJogador [15][15];
+  int mapa[15][15] = {
+      {5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},
+      {5,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+      {5,0,1,1,1,0,0,0,1,1,1,0,0,0,5},
+      {5,0,0,0,0,0,1,0,0,0,1,0,1,0,5},
+      {5,0,1,0,1,0,1,1,1,0,1,0,1,0,5},
+      {5,0,0,0,1,0,0,0,1,0,0,0,1,0,5},
+      {5,1,1,0,1,1,1,0,1,1,1,0,1,0,5},
+      {5,0,0,0,0,0,0,0,0,0,1,0,0,0,5},
+      {5,0,1,1,1,1,1,0,1,0,1,1,1,0,5},
+      {5,0,0,0,0,0,1,0,1,0,0,0,1,0,5},
+      {5,1,1,1,1,0,1,0,1,1,1,0,1,0,5},
+      {5,0,0,7,1,0,0,0,0,0,1,0,0,0,5},
+      {5,0,1,0,1,1,1,1,1,0,1,1,1,0,5},
+      {5,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+      {5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}
+  };
+  
   for(int c1=0;c1<15;c1++){
     for(int c2=0;c2<15;c2++)
       mapaJogador[c1][c2] = 6;
@@ -149,12 +170,14 @@ int main(){
   int mov;
 
   while(1){
-    printMapa();
-    mov = printMovimento();
+    
+    printMapa(mapaJogador,pscJog,mapa);
+    mov = printMovimento(mapa,pscJog);
     printf("\n");
-    movimento(mov);
-    if(verificadorVitoria() == true){
-       printMapa();
+    movimento(mov,pscJog,mapaJogador);
+
+    if(verificadorVitoria(pscJog,mapa) == true){
+       printMapa(mapaJogador,pscJog,mapa);
        printf("\n***VOCE VENCEU***");
        system("stty sane");
       return 0;
