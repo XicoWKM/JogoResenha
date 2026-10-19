@@ -3,109 +3,60 @@
 #include<string.h>
 #include <stdbool.h>
 #define ESC "\033["
-//variavel global da posiçaõ do jogador e do mapa
-// int pscJog[2] = {1,1};
-// int mapaJogador [15][15];
-// int mapa[15][15] = {
-//     {5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},
-//     {5,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-//     {5,0,1,1,1,0,0,0,1,1,1,0,0,0,5},
-//     {5,0,0,0,0,0,1,0,0,0,1,0,1,0,5},
-//     {5,0,1,0,1,0,1,1,1,0,1,0,1,0,5},
-//     {5,0,0,0,1,0,0,0,1,0,0,0,1,0,5},
-//     {5,1,1,0,1,1,1,0,1,1,1,0,1,0,5},
-//     {5,0,0,0,0,0,0,0,0,0,1,0,0,0,5},
-//     {5,0,1,1,1,1,1,0,1,0,1,1,1,0,5},
-//     {5,0,0,0,0,0,1,0,1,0,0,0,1,0,5},
-//     {5,1,1,1,1,0,1,0,1,1,1,0,1,0,5},
-//     {5,0,0,7,1,0,0,0,0,0,1,0,0,0,5},
-//     {5,0,1,0,1,1,1,1,1,0,1,1,1,0,5},
-//     {5,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-//     {5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}
-// };
-//
-
 
 int printMovimento(int mapa[15][15],int pscJog[]){
   int mov = 0;
   //movimento y
     //cima
-    if(mapa[pscJog[0]-1][pscJog[1]] != 1 && mapa[pscJog[0]-1][pscJog[1]] != 5){
-    // printf("\nCima livre");
-      mov += 1;
-    }
-    // else if(mapa[pscJog[0]-1][pscJog[1]] == 1 )
-    //   printf("\nCima bloqueada");
+    if(mapa[pscJog[0]-1][pscJog[1]] != 1 && mapa[pscJog[0]-1][pscJog[1]] != 5)
+        mov += 1;
     //fbaixo
-    if(mapa[pscJog[0]+1][pscJog[1]] != 1 && mapa[pscJog[0]+1][pscJog[1]] != 5){
-     // printf("\nBaixo livre");
-      mov += 2;
-    }
-    // else if(mapa[pscJog[0]+1][pscJog[1]] == 1 )
-    //   printf("\nBaixo bloqueada");
-//movimento x
+    if(mapa[pscJog[0]+1][pscJog[1]] != 1 && mapa[pscJog[0]+1][pscJog[1]] != 5)
+        mov += 2;
+  //movimento x
     //direita
-    if(mapa[pscJog[0]][pscJog[1]+1] != 1 && mapa[pscJog[0]][pscJog[1]+1] != 5){
-    //  printf("\nDireita livre");
+    if(mapa[pscJog[0]][pscJog[1]+1] != 1 && mapa[pscJog[0]][pscJog[1]+1] != 5)
        mov += 4;
-    }
-    // else if(mapa[pscJog[0]][pscJog[1]+1] == 1 )
-    //  printf("\nDireita bloqueada");
     //esquerda
-    if(mapa[pscJog[0]][pscJog[1]-1] != 1 && mapa[pscJog[0]][pscJog[1]-1] != 5){
-    //  printf("\nEsquerda livre");
-     mov += 8;
-    }
-    // else if(mapa[pscJog[0]][pscJog[1]-1] == 1 )
-    // /  printf("\nEsquerda bloqueada");
-
+    if(mapa[pscJog[0]][pscJog[1]-1] != 1 && mapa[pscJog[0]][pscJog[1]-1] != 5)
+       mov += 8;
+    
   return mov;
 }
 
-void movimento(int mov,int pscJog[],int mapaJogador[15][15]){
+int movimento(int mov,int pscJog[],int mapaJogador[15][15]){
   //tranformar o int em um numero binario
   bool binario[4];
   for(int i=0;i<4;i++){ 
     binario[i] = (bool) (mov%2);
     mov = mov/2;
-    //printf("%d\t",binario[i]);
   } 
-  //onde o jogador quer ir e verificar se é possivel
+//onde o jogador quer ir e verificar se é possivel
   int opt;
-// printf("\nPara onde queres ir?:\n1. Cima\n2. Baixo\n3. Direita\n4. Esquerda");
    opt = fgetc(stdin);
-   //opt -= 0x30;
   //cima
   if(opt == 'w' && binario[0] == 1){
-   // mapaJogador[pscJog[0]][pscJog[1]] = 0;
     pscJog[0] = pscJog[0] - 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
-    //printf("\nPosicao do jogador x = %d e y = %d",pscJog[0],pscJog[1]);
   }
   //baixo
   else if(opt == 's' && binario[1] == 1){
-    //mapaJogador[pscJog[0]][pscJog[1]] = 0;
     pscJog[0] = pscJog[0] + 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
-    //printf("\nPosicao do jogador x = %d e y = %d",pscJog[0],pscJog[1]);
   }
   //direita
   else if(opt == 'd' && binario[2] == 1){
     mapaJogador[pscJog[0]][pscJog[1]] = 0;
     pscJog[1] = pscJog[1] + 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
-    //printf("\nPosicao do jogador x = %d e y = %d",pscJog[0],pscJog[1]);
   }
   //esquerda
   else if(opt == 'a' && binario[3] == 1){
-   // mapaJogador[pscJog[0]][pscJog[1]] = 0;
     pscJog[1] = pscJog[1] - 1;
     mapaJogador[pscJog[0]][pscJog[1]] = 2;
-    //printf("\nPosicao do jogador x = %d e y = %d",pscJog[1],pscJog[0]);
   }
-  else{
-    //printf("***Opcao invalida***\nPosicao do jogador x = %d e y = %d",pscJog[0],pscJog[1]);
-  }
+  else if(opt == 'q')
+    return 1;
 
 }
 
@@ -174,12 +125,17 @@ int main(){
     printMapa(mapaJogador,pscJog,mapa);
     mov = printMovimento(mapa,pscJog);
     printf("\n");
-    movimento(mov,pscJog,mapaJogador);
-
+    char quit=movimento(mov,pscJog,mapaJogador);
+    //verificador para fechar o jogo
+    if(quit == 1){
+      system("stty sane");
+      printf("\n****JOGO FECHADO***\n");
+      return 0;
+    }
     if(verificadorVitoria(pscJog,mapa) == true){
-       printMapa(mapaJogador,pscJog,mapa);
-       printf("\n***VOCE VENCEU***");
-       system("stty sane");
+      printMapa(mapaJogador,pscJog,mapa);
+      printf("\n***VOCE VENCEU***\n");
+      system("stty sane");
       return 0;
     }
   }
