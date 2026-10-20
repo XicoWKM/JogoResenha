@@ -251,6 +251,11 @@ int main(){
   while(1){
     
     printMapa(mapaJogador,pscJog,mapa);
+    #if defined(__unix__) || defined(__APPLE__)
+      usleep(8000);  
+    #elif defined(__WIN32)
+      sleep(8);
+    #endif
     mov = printMovimento(mapa,pscJog);
     printf("\n");
     char quit=movimento(mov,pscJog,mapaJogador);
