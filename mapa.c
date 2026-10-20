@@ -66,7 +66,7 @@ void printMapa(int mapaJogador[15][15],int pscJog[],int mapa[15][15]){
    mapaJogador[pscJog[0]+1][pscJog[1]] = mapa[pscJog[0]+1][pscJog[1]];
    mapaJogador[pscJog[0]][pscJog[1]+1] = mapa[pscJog[0]][pscJog[1]+1];
    mapaJogador[pscJog[0]][pscJog[1]-1] = mapa[pscJog[0]][pscJog[1]-1];
-  system("clear");
+  //system("clear");
   for(int y=0;y<15;y++){
     for(int x=0;x<15;x++){
       if(mapaJogador[y][x] == 6)
@@ -93,7 +93,7 @@ bool verificadorVitoria(int pscJog[], int mapa[15][15]){
 }
 
 int main(){
-  system("stty -icanon -echo");
+  //system("stty -icanon -echo");
   int pscJog[2] = {1,1};
   int mapaJogador [15][15];
   int mapa[15][15] = {
@@ -128,14 +128,14 @@ int main(){
     char quit=movimento(mov,pscJog,mapaJogador);
     //verificador para fechar o jogo
     if(quit == 1){
-      system("stty sane");
+      //system("stty sane");
       printf("\n****JOGO FECHADO***\n");
       return 0;
     }
     if(verificadorVitoria(pscJog,mapa) == true){
       printMapa(mapaJogador,pscJog,mapa);
       printf("\n***VOCE VENCEU***\n");
-      system("stty sane");
+      //system("stty sane");
       return 0;
     }
   }
