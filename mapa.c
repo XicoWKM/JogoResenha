@@ -13,8 +13,8 @@
 # include <termios.h>
 # include <sys/ioctl.h>
 #endif
-#define ESC "\033["
 
+#define ESC "\033["
 
 //serve para guardar as infrmações do terminal 
 //retirado do codigo do nicolas jogo da velha
@@ -118,7 +118,7 @@ void setup_terminal()
 }
 
 
-//meu codigo 
+//meu codigo '
 int printMovimento(int mapa[15][15],int pscJog[]){
   int mov = 0;
   //movimento y
@@ -210,6 +210,7 @@ void printMapa(int mapaJogador[15][15],int pscJog[],int mapa[15][15]){
     }
     printf("\n");
   }
+  fflush(stdout);
 }
 bool verificadorVitoria(int pscJog[], int mapa[15][15]){
   if(mapa[pscJog[0]][pscJog[1]] == 7)
@@ -263,8 +264,9 @@ int main(){
     }
     if(verificadorVitoria(pscJog,mapa) == true){
       printMapa(mapaJogador,pscJog,mapa);
-      printf(ESC"1m\n***VOCE VENCEU***\n");
       restore_terminal();
+      printf(ESC"1m\n***VOCE VENCEU***\n");
+      // restore_terminal();
      // system("stty sane");
       return 0;
     }
